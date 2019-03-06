@@ -1,0 +1,4 @@
+Comp_A : TypeA
+Comp_C : TypeA
+Comp_B : TypeB
+Comp_D : TypeC
