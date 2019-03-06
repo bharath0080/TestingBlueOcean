@@ -1,1 +1,1 @@
-deploymentType : DEV
+deploymentType : DEV_AND_QA
