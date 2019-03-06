@@ -8,7 +8,7 @@ pipeline{
 				script{
 					bat 'echo build'
 					def deploymentType = readFile 'deployment.txt'
-					env.type = deploymentType.split(':').trim()
+					env.type = deploymentType.split(':')[1].trim()
 				}
 			}
 		}
