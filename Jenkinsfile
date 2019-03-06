@@ -1,4 +1,4 @@
-pipeline{
+/*pipeline{
 	agent {
 		label 'master'
 	}
@@ -34,4 +34,50 @@ pipeline{
 		}
 		
 	}
+}
+*/
+pipeline{
+agent { label "master"}
+  stages{
+    stage('CI'){
+      steps{
+        script {
+			def builders = [:]
+			def builders1 = [:]
+			File labels1 = new File( "components.txt" )
+			def labels = labels1.readLines()
+			for ( x in labels ){
+				def componentTag = x.split(":")[1].trim()
+				println componentTag
+				def component = x.split(":")[0].trim()
+				println component
+				if ( componentTag == "TypeA" ){
+                    builders[component] = {
+						node {
+							stage(component){
+								echo component
+							}
+						}
+					}
+            } else if ((componentTag == "TypeB") || (componentTag == "TypeC")){
+				builders1[component] = {          
+					node {
+						stage(component){
+							echo component
+						}
+                    }
+                }
+            }
+        }
+        if (!builders.isEmpty()){
+			parallel builders
+         }
+         if(!builders1.isEmpty()){
+			parallel builders1
+         }
+        }
+
+      }
+    }
+  }
 }
