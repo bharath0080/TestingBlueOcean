@@ -44,7 +44,7 @@ agent { label "master"}
         script {
 			def builders = [:]
 			def builders1 = [:]
-			File labels1 = new File( "components.txt" )
+			File labels1 = new File( "${WORKSPACE}/components.txt" )
 			def labels = labels1.readLines()
 			for ( x in labels ){
 				def componentTag = x.split(":")[1].trim()
